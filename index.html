@@ -3,68 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Animated Space</title>
+    <title>Interactive Space</title>
     <style>
+        :root {
+            --bg-color: #0f0c29;
+            --accent-color: rgba(255, 255, 255, 0.1);
+        }
+
         body {
             margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            transition: background 0.8s ease;
+            font-family: 'Segoe UI', sans-serif;
             overflow: hidden;
             color: white;
+            cursor: pointer; /* Tells the user they can click anywhere */
         }
 
-        /* The Animated Card */
         .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: var(--accent-color);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 3rem;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            user-select: none;
+            transition: transform 0.2s ease, background 0.5s ease;
             animation: float 4s ease-in-out infinite;
         }
 
-        h1 { margin: 0; font-size: 2.5rem; letter-spacing: 2px; }
-        p { opacity: 0.8; font-size: 1.1rem; }
+        /* Shrink effect when clicking */
+        .card:active {
+            transform: scale(0.95);
+        }
 
-        /* Floating Animation */
+        h1 { margin: 0; font-size: 2.5rem; pointer-events: none; }
+        p { opacity: 0.8; pointer-events: none; }
+
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
         }
 
-        /* Decorative Bubbles */
-        .bubble {
+        .instruction {
             position: absolute;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            z-index: -1;
-            animation: rise 10s infinite linear;
-        }
-
-        @keyframes rise {
-            from { transform: translateY(100vh) scale(0); opacity: 1; }
-            to { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+            bottom: 20px;
+            opacity: 0.5;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="bubble" style="width: 80px; height: 80px; left: 10%; animation-duration: 8s;"></div>
-    <div class="bubble" style="width: 120px; height: 120px; left: 70%; animation-duration: 12s;"></div>
-    <div class="bubble" style="width: 50px; height: 50px; left: 40%; animation-duration: 6s;"></div>
-
-    <div class="card">
-        <h1>Hello, Friend! 🚀</h1>
-        <p>This page is hosted entirely on GitHub.</p>
-        <p style="font-size: 0.8rem; margin-top: 20px;">Built with ✨ Magic & CSS</p>
+    <div class="card" id="mainCard">
+        <h1 id="title">Click Me! ⚡</h1>
+        <p id="subtitle">I'm feeling a bit blue.</p>
     </div>
 
+    <div class="instruction">Tap anywhere to change the vibe</div>
+
+    <script>
+        const body = document.body;
+        const title = document.getElementById('title');
+        const subtitle = document.getElementById('subtitle');
+        
+        const themes = [
+            { bg: "#1a2a6c", text: "Deep Sea 🌊", sub: "Feeling the ocean vibes now." },
+            { bg: "#b21f1f", text: "Mars Rover 🚀", sub: "Is there life on Red?" },
+            { bg: "#45a247", text: "Forest Run 🌿", sub: "Fresh air and green pixels." },
+            { bg: "#8e44ad", text: "Cyber Purple 💜", sub: "Welcome to the future." },
+            { bg: "#f39c12", text: "Golden Hour ☀️", sub: "Stay gold, Ponyboy." }
+        ];
+
+        let currentTheme = 0;
+
+        function changeTheme() {
+            currentTheme = (currentTheme + 1) % themes.length;
+            const theme = themes[currentTheme];
+            
+            body.style.setProperty('--bg-color', theme.bg);
+            title.innerText = theme.text;
+            subtitle.innerText = theme.sub;
+        }
+
+        // Listen for clicks anywhere on the page
+        window.addEventListener('click', changeTheme);
+    </script>
 </body>
 </html>
