@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Animated Space</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* The Animated Card */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; letter-spacing: 2px; }
+        p { opacity: 0.8; font-size: 1.1rem; }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Decorative Bubbles */
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: -1;
+            animation: rise 10s infinite linear;
+        }
+
+        @keyframes rise {
+            from { transform: translateY(100vh) scale(0); opacity: 1; }
+            to { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bubble" style="width: 80px; height: 80px; left: 10%; animation-duration: 8s;"></div>
+    <div class="bubble" style="width: 120px; height: 120px; left: 70%; animation-duration: 12s;"></div>
+    <div class="bubble" style="width: 50px; height: 50px; left: 40%; animation-duration: 6s;"></div>
+
+    <div class="card">
+        <h1>Hello, Friend! 🚀</h1>
+        <p>This page is hosted entirely on GitHub.</p>
+        <p style="font-size: 0.8rem; margin-top: 20px;">Built with ✨ Magic & CSS</p>
+    </div>
+
+</body>
+</html>
