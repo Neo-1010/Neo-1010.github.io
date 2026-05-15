@@ -98,10 +98,15 @@
 
         // When "Yes" is clicked
         yesBtn.addEventListener('click', () => {
-            mainCard.classList.add('hidden');
-            successCard.classList.remove('hidden');
-            createConfetti();
-        });
+        mainCard.classList.add('hidden');
+        successCard.classList.remove('hidden');
+        createConfetti();
+
+    // This opens WhatsApp with a pre-filled message
+    // Replace 1234567890 with your actual phone number (include country code)
+        setTimeout(() => {
+        window.open("https://wa.me/9446001366?text=Hloiiii", "_blank");}, 2000); 
+});
 
         // Simple Confetti effect
         function createConfetti() {
